@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    输入用户名：<input id="username" type="text">
+<input id="chk" type="button" value="检测是否可用">
+<script>
+  var chk = document.getElementById('chk');
+  var username = document.getElementById('username');
+  chk.onclick = function() {
+    if (username.value === '') {
+      alert('用户名不能为空！');
+      return false;
+    }
+    var xhr = new XMLHttpRequest();
+    xhr.onreadystatechange = function() {
+      if (xhr.readyState === XMLHttpRequest.DONE) {
+        if (xhr.status >= 200 && xhr.status < 300 || xhr.status === 304) {
+          var data = JSON.parse(xhr.responseText);
+          if (data.isReg) {
+            alert('对不起，该用户名已经被注册');
+          } else {
+            alert('恭喜您，该用户名可以注册！');
+          }
+        } else {
+          alert('服务器发生错误。');
+        }
+      }
+    };
+    xhr.open('GET', 'user.php?username=' + username.value);
+    xhr.send();
+  };
+</script>
+user.php
+<?php
+$username = 'admin';
+echo json_encode(['isReg' => ($_GET['username'] == $username)]);
+
+
+
+</body>
+</html>

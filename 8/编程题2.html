@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- ① CSS样式 -->
+    <style>
+        .login-header {
+            width: 100%;
+            text-align: center;
+            height: 30px;
+            font-size: 24px;
+            line-height: 30px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        .box {
+            width: 400px;
+            height: 300px;
+            border: 5px solid #eee;
+            box-shadow: 2px 2px 2px 2px #666;
+            position: absolute;
+            top: 15%;
+            left: 30%;
+            display: none;
+        }
+
+        .hd {
+            width: 100%;
+            height: 25px;
+            background-color: #7c9299;
+            border-bottom: 1px solid #369;
+            line-height: 25px;
+            color: white;
+            cursor: move;
+        }
+
+        #box_close {
+            float: right;
+            cursor: pointer;
+        }
+    </style>
+
+    <!-- ② 编写HTML -->
+    <div class="login-header"><a id="link">点击，弹出登录框</a></div>
+    <div class="box" id="box">
+        <div class="hd" id="drop">注册信息 (可以拖拽)
+            <span id="box_close">【关闭】</span>
+        </div>
+        <div class="bd"></div>
+    </div>
+    <!-- ③ JavaScript处理键盘按键 -->
+
+    <script>
+        // 获取“点击，弹出登录框”的链接、登录框的关闭按钮、登录框、页面背景色
+        var link = document.getElementById("link");
+        var closeBtn = document.getElementById("box_close");
+        var login = document.getElementById("box");
+        // 点击登录 显示登录框和遮罩
+        link.onclick = function () {
+            login.style.display = "block";
+        }
+        // 点击关闭按钮 隐藏登录框和遮罩
+        closeBtn.onclick = function () {
+            login.style.display = "none";
+        }
+        // 按下键盘上的ESC键 隐藏登录框和遮罩
+        document.onkeydown = function (e) {
+            console.log(e.keyCode);//ESC键的键盘码是27
+            if (e.keyCode === 27) {
+                closeBtn.onclick();
+            }
+        }
+    </script>
+
+</body>
+</html>

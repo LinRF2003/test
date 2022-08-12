@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- ① CSS样式- -->
+    <style>
+        #toolbar {
+            border: 1px solid #ff5c00;
+            border-radius: 8px;
+            width: 60px;
+            position: absolute;
+            height: 30px;
+            line-height: 30px;
+            top: 0;
+            left: 0;
+            display: none;
+            background-color: #fff;
+            text-align: center;
+            font-size: 12px;
+        }
+
+        #toolbar e {
+            position: absolute;
+            top: -5px;
+            left: 20px;
+            width: 10px;
+            height: 5px;
+            background: url(arrow.gif) no-repeat;
+        }
+    </style>
+
+    <!-- ② 编写HTML -->
+    <div id="share">显示悬浮工具栏。</div>
+    <div>不显示悬浮工具栏</div>
+    <div id="toolbar">
+        <e></e><span>分享<span>
+    </div>
+
+    <!-- ④ 事件处理 -->
+    <script>
+        var toolbar = document.getElementById('toolbar');
+        var share = document.getElementById('share');
+        share.onmouseup = function (event) {
+            // 获取鼠标按下时的位置
+            var pageX = event.pageX || event.clientX + document.documentElement.scrollLeft;
+            var pageY = event.pageY || event.clientY + document.documentElement.scrollTop;
+            // 判断是否有文本选中，选中则显示浮动工具栏
+            if (window.getSelection().toString() || document.selection.createRange().text) {
+                toolbar.style.display = 'block';
+                // 设置浮动工具栏的显示位置
+                toolbar.style.left = pageX - 20 + 'px';
+                toolbar.style.top = pageY + 10 + 'px';
+            }
+        };
+        document.onmousedown = function (event) {
+            var event = event || window.event;
+            var target = event.target || event.srcElement;
+            var targetId = target.id;
+            //没有发生在toolbar身上才隐藏悬浮工具栏
+            if (targetId != "toolbar") {
+                toolbar.style.display = 'none';
+            }
+        }
+    </script>
+
+
+</body>
+</html>

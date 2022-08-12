@@ -1,0 +1,14 @@
+一、填空题
+1.window或window对象
+2.setTimeout()
+3.length或length属性
+
+二、判断题
+1.对。
+2.对。
+3.对。
+4.错。
+
+三、选择题
+1.B
+2.D

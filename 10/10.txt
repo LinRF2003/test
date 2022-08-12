@@ -1,0 +1,11 @@
+一、填空题
+1.Content-Type
+2.onreadystatechange事件
+二、判断题
+1.对。
+2.对。
+3.对。
+三、选择题
+1.B
+2.B
+3.A、C

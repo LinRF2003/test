@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- ① CSS样式 -->
+    <style>
+        .login-header {
+            width: 100%;
+            text-align: center;
+            height: 30px;
+            font-size: 24px;
+            line-height: 30px;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        .box {
+            width: 400px;
+            height: 300px;
+            border: 5px solid #eee;
+            box-shadow: 2px 2px 2px 2px #666;
+            position: absolute;
+            top: 15%;
+            left: 30%;
+        }
+
+        .hd {
+            width: 100%;
+            height: 25px;
+            background-color: #7c9299;
+            border-bottom: 1px solid #369;
+            line-height: 25px;
+            color: white;
+            cursor: move;
+        }
+
+        #box_close {
+            float: right;
+            cursor: pointer;
+        }
+    </style>
+
+    <!-- ② 编写HTML -->
+    <div class="box" id="box">
+        <div class="hd" id="drop">注册信息 (可以拖拽)
+            <span id="box_close">【关闭】</span>
+        </div>
+        <div class="bd"></div>
+    </div>
+
+    <!-- ③ 处理拖拽事件 -->
+
+    <script type="text/javascript" src="../jQuery.min.js"></script>
+    <script>
+        $("#drop").mousedown(function (event) {// 鼠标在拖动条上 按下 可拖动盒子  
+            var event = event || window.event;
+            // 获取鼠标按下时的位置
+            var pageX = event.pageX || event.clientX + document.documentElement.scrollLeft;
+            var pageY = event.pageY || event.clientY + document.documentElement.scrollTop;
+            // 计算鼠标按下的位置 距 盒子的位置
+            var spaceX = pageX - parseInt($("#box").offset().left);
+            var spaceY = pageY - parseInt($("#box").offset().top);
+            // 鼠标移动的时候 获取鼠标的位置 整个盒子跟着鼠标的位置走
+            $(document).mousemove(function (event) {
+                var event = event || window.event;
+                // 获取移动后鼠标的位置
+                var pageX = event.pageX || event.clientX + document.documentElement.scrollLeft;
+                var pageY = event.pageY || event.clientY + document.documentElement.scrollTop;
+                // 计算并设置盒子移动后的位置
+                var l = parseInt(pageX - spaceX), t = parseInt(pageY - spaceY);
+                $("#box").offset({ left: l, top: t });
+                //  清理鼠标拖动时，选中拖动条中文字的情况
+                window.getSelection().removeAllRanges() || document.selection.empty();
+            });
+        });
+        $(document).mouseup(function () {// 释放鼠标按键时  取消盒子的移动 
+            $(document).unbind("mousemove")
+        });
+    </script>
+
+</body>
+</html>
