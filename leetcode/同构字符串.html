@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        var isIsomorphic = function (s, t) {
+            let map1 = new Map;
+            let map2 = new Map;
+            if (s.length !== t.length) return false;
+            for (let i = 0; i < s.length; i++) {
+                if (map1.has(s[i])) {
+                    if (map1.get(s[i]) !== t[i]) return false;
+                } else {
+                    map1.set(s[i], t[i]);
+                }
+                if (map2.has(t[i])) {
+                    if (map2.get(t[i]) !== s[i]) return false;
+                } else {
+                    map2.set(t[i], s[i]);
+                }
+            }
+            return true;
+        };
+
+    </script>
+</body>
+</html>
